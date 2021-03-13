@@ -97,6 +97,17 @@ stages:
               searchFolder: '$(System.DefaultWorkingDirectory)'
               uiTests: true
               testRunTitle: 'Testes de Interface'
+          - task: VSTest@2
+            displayName: Executar testes associados ao Test Plans
+            inputs:
+              testSelector: 'testPlan'
+              testPlan: '7'
+              testSuite: '8'
+              testConfiguration: '2'
+              searchFolder: '$(System.DefaultWorkingDirectory)'
+              uiTests: true
+              vsTestVersion: 'toolsInstaller'
+              testRunTitle: 'Test Plan'
           - task: DeleteFiles@1
             displayName: Exclui os arquivos da pasta drop
             inputs:
