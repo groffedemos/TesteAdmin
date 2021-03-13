@@ -196,7 +196,7 @@ stages:
    - deployment: LoadTest
      displayName: LoadTest
      pool:
-      vmImage: 'LoadTest'
+      name: 'LoadTest'
      environment: 'Load Test'
      strategy:
       runOnce:
