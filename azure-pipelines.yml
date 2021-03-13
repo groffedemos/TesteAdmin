@@ -197,6 +197,17 @@ stages:
                 PathtoPublish: '$(System.DefaultWorkingDirectory)/taurus-output'
                 ArtifactName: 'LoadTests'
                 publishLocation: 'Container'
+            - script: 'jmeter -n -t $(System.ArtifactsDirectory)\LoadTest.jmx -l $(System.ArtifactsDirectory)\$(Build.BuildId).jtl'
+              displayName: 'Run JMeter'
+            - script: 'python $(System.ArtifactsDirectory)\jtl_junit_converter.py $(System.ArtifactsDirectory)\$(Build.BuildId).jtl $(System.ArtifactsDirectory)\$(Build.BuildId).xml' 
+              displayName: 'Convert JMeter Result to JUnit'
+            - task: PublishTestResults@2
+              displayName: 'Publish Load Test Results'
+              inputs:
+                testResultsFiles: '$(Build.BuildId).xml'
+                searchFolder: '$(System.ArtifactsDirectory)'
+                testRunTitle: 'Load Tests Hosted Agent'
+
  - stage: LoadTest
    displayName: Load Test em Pre Prod
    jobs:
@@ -215,10 +226,10 @@ stages:
               downloadType: 'single'
               artifactName: 'drop'
               downloadPath: '$(System.ArtifactsDirectory)'
-          - script: 'jmeter -n -t $($(System.ArtifactsDirectory))\LoadTest.jmx -l C:\$(Build.DefinitionName)\$(Build.BuildId).jtl'
+          - script: 'jmeter -n -t $(System.ArtifactsDirectory)\LoadTest.jmx -l C:\$(Build.DefinitionName)\$(Build.BuildId).jtl'
             workingDirectory: 'C:\JMeter\apache-jmeter-5.3\bin'
             displayName: 'Run JMeter'
-          - script: 'python $($(System.ArtifactsDirectory))\jtl_junit_converter.py C:\$(Build.DefinitionName)\$(Build.BuildId).jtl C:\$(Build.DefinitionName)\$(Build.BuildId).xml' 
+          - script: 'python $(System.ArtifactsDirectory)\jtl_junit_converter.py C:\$(Build.DefinitionName)\$(Build.BuildId).jtl C:\$(Build.DefinitionName)\$(Build.BuildId).xml' 
             workingDirectory: 'C:\Users\vmadmin\AppData\Local\Programs\Python\Python38-32'
             displayName: 'Convert JMeter Result to JUnit'
           - task: PublishTestResults@2
