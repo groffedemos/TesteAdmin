@@ -243,7 +243,7 @@ stages:
             inputs:
               testResultsFiles: '$(Build.BuildId).xml'
               searchFolder: 'C:\$(Build.DefinitionName)'
-              testRunTitle: 'Load Tests'
+              testRunTitle: 'Load Tests VM'
  - stage: DeployProd
    displayName: Faz Deploy em Prod
    jobs:
