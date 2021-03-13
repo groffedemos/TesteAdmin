@@ -107,7 +107,7 @@ stages:
             inputs:
               testSelector: 'testPlan'
               testPlan: '7'
-              testSuite: '8'
+              testSuite: '9'
               testConfiguration: '3'
               searchFolder: '$(System.DefaultWorkingDirectory)'
               vsTestVersion: 'toolsInstaller'
