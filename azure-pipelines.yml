@@ -108,7 +108,7 @@ stages:
               testSelector: 'testPlan'
               testPlan: '7'
               testSuite: '8'
-              testConfiguration: '2'
+              testConfiguration: '3'
               searchFolder: '$(System.DefaultWorkingDirectory)'
               vsTestVersion: 'toolsInstaller'
               codeCoverageEnabled: false
