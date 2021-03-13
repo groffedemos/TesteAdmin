@@ -97,6 +97,11 @@ stages:
               searchFolder: '$(System.DefaultWorkingDirectory)'
               uiTests: true
               testRunTitle: 'Testes de Interface'
+          - task: VisualStudioTestPlatformInstaller@1
+            displayName: Instalar VS Test Platform
+            inputs:
+              packageFeedSelector: 'nugetOrg'
+              versionSelector: 'latestPreRelease'
           - task: VSTest@2
             displayName: Executar testes associados ao Test Plans
             inputs:
