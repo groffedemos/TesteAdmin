@@ -232,10 +232,10 @@ stages:
               downloadType: 'single'
               artifactName: 'drop'
               downloadPath: '$(System.ArtifactsDirectory)'
-          - script: 'jmeter -n -t $(System.ArtifactsDirectory)\LoadTest.jmx -l C:\$(Build.DefinitionName)\$(Build.BuildId).jtl'
+          - script: 'jmeter -n -t $(System.ArtifactsDirectory)/drop/LoadTest.jmx -l C:\$(Build.DefinitionName)\$(Build.BuildId).jtl'
             workingDirectory: 'C:\JMeter\apache-jmeter-5.3\bin'
             displayName: 'Run JMeter'
-          - script: 'python $(System.ArtifactsDirectory)\jtl_junit_converter.py C:\$(Build.DefinitionName)\$(Build.BuildId).jtl C:\$(Build.DefinitionName)\$(Build.BuildId).xml' 
+          - script: 'python $(System.ArtifactsDirectory)/drop/jtl_junit_converter.py C:\$(Build.DefinitionName)\$(Build.BuildId).jtl C:\$(Build.DefinitionName)\$(Build.BuildId).xml' 
             workingDirectory: 'C:\Users\vmadmin\AppData\Local\Programs\Python\Python38-32'
             displayName: 'Convert JMeter Result to JUnit'
           - task: PublishTestResults@2
