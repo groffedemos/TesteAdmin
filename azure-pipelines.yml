@@ -185,10 +185,11 @@ stages:
               inputs:
                 testResultsFormat: 'JUnit'
                 testResultsFiles: 'taurus-output/TEST-Taurus.xml'
-            - task: publishhtmlreport@1
+            - task: PublishBuildArtifacts@1
               inputs:
-                htmlType: 'Jmeter'
-                JmeterReportsPath: '$(Build.SourcesDirectory)/Taurus Report'
+                PathtoPublish: '$(System.DefaultWorkingDirectory)/taurus-output'
+                ArtifactName: 'LoadTests'
+                publishLocation: 'Container'
  - stage: DeployProd
    displayName: Faz Deploy em Prod
    jobs:
