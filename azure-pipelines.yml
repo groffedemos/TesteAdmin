@@ -143,6 +143,7 @@ stages:
           deploy:
             steps:
             - task: AzureAppServiceManage@0
+              displayName: Swap Homolog e PreProd
               inputs:
                 azureSubscription: 'Microsoft Azure Sponsorship(ff737bc0-dba1-4359-af80-837301207505)'
                 Action: 'Swap Slots'
@@ -151,7 +152,31 @@ stages:
                 SourceSlot: 'homolog'
                 SwapWithProduction: false
                 TargetSlot: 'preprod'
- 
+            - task: JMeterInstaller@0
+              displayName: Install JMeter 5.2.1
+            - task: UsePythonVersion@0
+              displayName: Use Python 3.x
+            - task: TaurusInstaller@0
+              displayName: Install Taurus 1.14.1
+            - task: TaurusRunner@0
+              displayName: Run Taurus
+              inputs:
+                taurusConfig: >-
+                  execution:
+
+                  - scenario:
+                      requests:
+                      - http://anpcomm-admin-exemplo-preprod.azurewebsites.net/Login
+                      # You can also reference a JMeter test plan (recommended)
+                      # script: website-test.jmx
+                    concurrency: 5
+                    iterations: 10
+                    ramp-up: 2s
+
+                  reporting:
+
+                  - module: junit-xml
+                    filename: taurus-output/TEST-Taurus.xml         
  - stage: DeployProd
    displayName: Faz Deploy em Prod
    jobs:
