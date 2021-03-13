@@ -190,6 +190,29 @@ stages:
                 PathtoPublish: '$(System.DefaultWorkingDirectory)/taurus-output'
                 ArtifactName: 'LoadTests'
                 publishLocation: 'Container'
+ - stage: LoadTest
+   displayName: Load Test em Pre Prod
+   jobs:
+   - deployment: LoadTest
+     displayName: LoadTest
+     pool:
+      vmImage: 'LoadTest'
+     environment: 'Load Test'
+     strategy:
+      runOnce:
+        deploy:
+          steps:
+          - script: 'jmeter -n -t $(Build.SourcesDirectory)/LoadTest.jmx -l C:\$(Build.DefinitionName)\$(Build.BuildId).jtl'
+            workingDirectory: 'C:\JMeter\apache-jmeter-5.3\bin'
+            displayName: 'Run JMeter'
+          - script: 'python $(Build.SourcesDirectory)/jtl_junit_converter.py C:\$(Build.DefinitionName)\$(Build.BuildId).jtl C:\$(Build.DefinitionName)\$(Build.BuildId).xml'
+            displayName: 'Convert JMeter Result to JUnit'
+          - task: PublishTestResults@2
+            displayName: 'Publish Load Test Results'
+            inputs:
+              testResultsFiles: '$(Build.BuildId).xml'
+              searchFolder: 'C:\$(Build.DefinitionName)'
+              testRunTitle: 'Load Tests'
  - stage: DeployProd
    displayName: Faz Deploy em Prod
    jobs:
