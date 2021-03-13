@@ -182,7 +182,12 @@ stages:
             - task: PublishTestResults@2
               inputs:
                 testResultsFormat: 'JUnit'
-                testResultsFiles: 'TEST-Taurus.xml'
+                testResultsFiles: 'taurus-output/TEST-Taurus.xml'
+            - task: publishhtmlreport@1
+              inputs:
+                htmlType: 'genericHTML'
+                htmlPath: 'index.html'
+                JmeterReportsPath: '$(System.DefaultWorkingDirectory)/Taurus Report'
  - stage: DeployProd
    displayName: Faz Deploy em Prod
    jobs:
