@@ -155,7 +155,9 @@ stages:
             - task: JMeterInstaller@0
               displayName: Install JMeter 5.2.1
             - task: UsePythonVersion@0
-              displayName: Use Python 3.x
+              displayName: 'Use Python 3.7'
+              inputs:
+                versionSpec: 3.7
             - task: TaurusInstaller@0
               displayName: Install Taurus 1.14.1
             - task: TaurusRunner@0
@@ -176,7 +178,11 @@ stages:
                   reporting:
 
                   - module: junit-xml
-                    filename: taurus-output/TEST-Taurus.xml         
+                    filename: taurus-output/TEST-Taurus.xml      
+            - task: PublishTestResults@2
+              inputs:
+                testResultsFormat: 'JUnit'
+                testResultsFiles: 'TEST-Taurus.xml'
  - stage: DeployProd
    displayName: Faz Deploy em Prod
    jobs:
