@@ -110,8 +110,8 @@ stages:
               testSuite: '8'
               testConfiguration: '2'
               searchFolder: '$(System.DefaultWorkingDirectory)'
-              uiTests: true
               vsTestVersion: 'toolsInstaller'
+              codeCoverageEnabled: false
               testRunTitle: 'Test Plan'
           - task: DeleteFiles@1
             displayName: Exclui os arquivos da pasta drop
