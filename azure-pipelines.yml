@@ -203,9 +203,9 @@ stages:
                 PathtoPublish: '$(System.DefaultWorkingDirectory)/taurus-output'
                 ArtifactName: 'LoadTests'
                 publishLocation: 'Container'
-            - script: 'jmeter -n -t $(System.ArtifactsDirectory)\drop\LoadTest.jmx -l $(System.ArtifactsDirectory)\$(Build.BuildId).jtl'
+            - script: 'jmeter -n -t $(System.ArtifactsDirectory)/drop/LoadTest.jmx -l $(System.ArtifactsDirectory)/$(Build.BuildId).jtl'
               displayName: 'Run JMeter'
-            - script: 'python $(System.ArtifactsDirectory)\drop\jtl_junit_converter.py $(System.ArtifactsDirectory)\$(Build.BuildId).jtl $(System.ArtifactsDirectory)\$(Build.BuildId).xml' 
+            - script: 'python $(System.ArtifactsDirectory)/drop/jtl_junit_converter.py $(System.ArtifactsDirectory)/$(Build.BuildId).jtl $(System.ArtifactsDirectory)/$(Build.BuildId).xml' 
               displayName: 'Convert JMeter Result to JUnit'
             - task: PublishTestResults@2
               displayName: 'Publish Load Test Results'
