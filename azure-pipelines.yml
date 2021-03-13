@@ -163,22 +163,24 @@ stages:
             - task: TaurusRunner@0
               displayName: Run Taurus
               inputs:
-                taurusConfig: >-
+                taurusConfig: |
                   execution:
-
                   - scenario:
                       requests:
                       - http://anpcomm-admin-exemplo-preprod.azurewebsites.net/Login
                       # You can also reference a JMeter test plan (recommended)
                       # script: website-test.jmx
-                    concurrency: 5
+                    concurrency: 100
                     iterations: 10
                     ramp-up: 2s
-
+                  
                   reporting:
-
                   - module: junit-xml
-                    filename: taurus-output/TEST-Taurus.xml      
+                    filename: taurus-output/TEST-Taurus.xml
+                jmeterHome: '$(JMeterInstaller.JMeterHome)'
+                jmeterPath: '$(JMeterInstaller.JMeterPath)'
+                jmeterVersion: '$(JMeterInstaller.JMeterVersion)'
+                outputDir: 'taurus-output'
             - task: PublishTestResults@2
               inputs:
                 testResultsFormat: 'JUnit'
