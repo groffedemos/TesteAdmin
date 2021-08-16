@@ -5,13 +5,13 @@ VisualStudioVersion = 16.0.30225.117
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ANPAdmin.UI", "ANPAdmin.UI\ANPAdmin.UI.csproj", "{61C0E664-4074-4185-B987-E66228E1F3B7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ANPAdmin.Data", "ANPAdmin.Data\ANPAdmin.Data.csproj", "{73637E4F-5258-4F3C-A60D-EF6C1B0DA092}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ANPAdmin.Data", "ANPAdmin.Data\ANPAdmin.Data.csproj", "{73637E4F-5258-4F3C-A60D-EF6C1B0DA092}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ANPAdmin.Business", "ANPAdmin.Business\ANPAdmin.Business.csproj", "{EFD58C3C-C618-4DA8-8FCD-558CE980717A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ANPAdmin.Business", "ANPAdmin.Business\ANPAdmin.Business.csproj", "{EFD58C3C-C618-4DA8-8FCD-558CE980717A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ANPAdmin.UnitTests", "ANPAdmin.UnitTests\ANPAdmin.UnitTests.csproj", "{06A8C377-112B-4A95-86F3-6C75CD104792}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ANPAdmin.UnitTests", "ANPAdmin.UnitTests\ANPAdmin.UnitTests.csproj", "{06A8C377-112B-4A95-86F3-6C75CD104792}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ANPAdmin.InterfaceTests", "ANPAdmin.InterfaceTests\ANPAdmin.InterfaceTests.csproj", "{CC398EA7-3426-4DE0-8163-44C3A3DA1CE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ANPAdmin.InterfaceTests", "ANPAdmin.InterfaceTests\ANPAdmin.InterfaceTests.csproj", "{CC398EA7-3426-4DE0-8163-44C3A3DA1CE9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
