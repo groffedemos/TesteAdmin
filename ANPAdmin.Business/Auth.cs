@@ -15,9 +15,8 @@ namespace ANPAdmin.Business
         {
             var usuario = _userRepository.ObterPorEmailESenha(email, senha);
 
-            // FIXME: Simulação de falha
-            if (usuario == null)
             //if (usuario == null || !usuario.Ativo) // Código correto
+            if (usuario == null) // FIXME: Simulação de falha
                 return null;
 
             return new AuthModel(usuario.Id, usuario.Nome, usuario.Email);
