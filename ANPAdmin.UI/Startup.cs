@@ -1,3 +1,4 @@
+using System;
 using ANPAdmin.Business;
 using ANPAdmin.Data;
 using FluentMigrator.Runner;
@@ -19,12 +20,11 @@ namespace ANPAdmin.UI
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddFluentMigratorCore()
                 .ConfigureRunner(cfg => cfg
-                    .AddSqlServer()
+                    .AddSQLite() // Utilize .AddSqlServer() caso escolha SQL Server
                     .WithGlobalConnectionString(Configuration.GetConnectionString("BaseComm"))
                     .ScanIn(typeof(Startup).Assembly).For.Migrations()
                 )
@@ -32,20 +32,26 @@ namespace ANPAdmin.UI
 
             services.AddHealthChecks();
             services.AddSession();
-            services.AddApplicationInsightsTelemetry(Configuration);
-            services.ConfigureTelemetryModule<DependencyTrackingTelemetryModule>(
-                (module, o) =>
-                {
-                    module.EnableSqlCommandTextInstrumentation = true;
-                });
+            
+            if (!String.IsNullOrWhiteSpace(Configuration["ApplicationInsights:InstrumentationKey"]))
+            {
+                services.AddApplicationInsightsTelemetry(Configuration);
+                services.ConfigureTelemetryModule<DependencyTrackingTelemetryModule>(
+                    (module, o) =>
+                    {
+                        module.EnableSqlCommandTextInstrumentation = true;
+                    });
+            }
 
             services.AddRazorPages();
 
             services.AddScoped<IAuth, Auth>();
-            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddSingleton<IUserRepository>(
+                new UserRepositorySQLite(Configuration.GetConnectionString("BaseComm")));
+            // Para utilizar SQL Server substitua a linha anterior por:
+            // services.AddScoped<IUserRepository, userRepository>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IMigrationRunner migrationRunner)
         {
             migrationRunner.MigrateUp();
