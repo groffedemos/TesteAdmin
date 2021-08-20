@@ -23,7 +23,7 @@ namespace ANPAdmin.UI.Migrations
         {
             Insert.IntoTable("Usuario").Row(new
             {
-                Nome = "Milton Camara",
+                Nome = "Azure na Prática",
                 Email = "suporte@azurenapratica.com",
                 Senha = "teste@123"
             });
