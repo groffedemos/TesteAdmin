@@ -26,7 +26,7 @@ namespace ANPAdmin.UI
                 .ConfigureRunner(cfg => cfg
                     .AddSQLite() // Utilize .AddSqlServer() caso escolha SQL Server
                     .WithGlobalConnectionString(Configuration.GetConnectionString("BaseComm"))
-                    .ScanIn(typeof(Startup).Assembly).For.Migrations()
+                    .ScanIn(typeof(IUserRepository).Assembly).For.Migrations()
                 )
                 .AddLogging(cfg => cfg.AddFluentMigratorConsole());
 
@@ -44,6 +44,7 @@ namespace ANPAdmin.UI
             }
 
             services.AddRazorPages();
+            services.AddHttpContextAccessor();
 
             services.AddScoped<IAuth, Auth>();
             services.AddSingleton<IUserRepository>(
