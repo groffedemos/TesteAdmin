@@ -64,4 +64,4 @@ jobs:
        azureSubscription: 'Azure - Imersão Azure DevOps-Imersão Azure DevOps'
        appType: 'webApp'
        WebAppName: '$(WebAppName)'
-       packageForLinux: '$(System.DefaultWorkingDirectory)/drop/ANPAdmin.UI.zip'
+       packageForLinux: '$(System.ArtifactsDirectory)/drop/ANPAdmin.UI.zip'
