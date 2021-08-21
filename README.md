@@ -14,3 +14,10 @@ Senha: **teste@123**
 Usuário: **inativo@azurenapratica.com**
 
 Senha: **inativo@123**
+
+## Testes com usuário ativo
+
+Sugestão para geração do nome da sua Web App:
+
+https://bit.ly/geracao-nome-webapp-imersaoazdevops
+
