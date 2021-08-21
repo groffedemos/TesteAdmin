@@ -8,27 +8,27 @@ jobs:
  - job: Build
    pool:
     vmImage: ubuntu-latest
-    steps:
-    - task: DotNetCoreCLI@2
-      displayName: 'Restore das Dependencias'
-      inputs:
-        command: 'restore'
-        projects: $(pathToProject)
-        feedsToUse: 'select'
-    - task: DotNetCoreCLI@2
-      displayName: 'Compilar Aplicação'
-      inputs:
-        command: 'build'
-        projects: '$(pathToProject)'
-    - task: DotNetCoreCLI@2
-      displayName: 'Gerar Artefatos'
-      inputs:
-        command: 'publish'
-        publishWebProjects: false
-        projects: '$(pathToProject)'
-        arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
-    - task: PublishBuildArtifacts@1
-      inputs:
-        PathtoPublish: '$(Build.ArtifactStagingDirectory)'
-        ArtifactName: 'drop'
-        publishLocation: 'Container'
+   steps:
+   - task: DotNetCoreCLI@2
+     displayName: 'Restore das Dependencias'
+     inputs:
+      command: 'restore'
+      projects: $(pathToProject)
+      feedsToUse: 'select'
+   - task: DotNetCoreCLI@2
+     displayName: 'Compilar Aplicação'
+     inputs:
+      command: 'build'
+      projects: '$(pathToProject)'
+   - task: DotNetCoreCLI@2
+     displayName: 'Gerar Artefatos'
+     inputs:
+      command: 'publish'
+      publishWebProjects: false
+      projects: '$(pathToProject)'
+      arguments: '--configuration Release --output $(Build.ArtifactStagingDirectory)'
+   - task: PublishBuildArtifacts@1
+     inputs:
+      PathtoPublish: '$(Build.ArtifactStagingDirectory)'
+      ArtifactName: 'drop'
+      publishLocation: 'Container'
