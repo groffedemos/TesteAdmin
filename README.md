@@ -1,3 +1,5 @@
+[[_TOC_]]
+
 # Introdução
 O projeto principal neste repositório é **ANPAdmin.UI**. Caso execute o mesmo a partir do **Visual Studio Code** ou localmente via **dotnet run** acesse o endereço (no **Visual Studio 2019** ou **2022** será assumido de forma aleatória um número de porta disponível em cada ambiente):
 
@@ -15,9 +17,9 @@ Usuário: **inativo@azurenapratica.com**
 
 Senha: **inativo@123**
 
-## Testes com usuário ativo
+## Como gerar o nome da Web App no Azure?
 
 Sugestão para geração do nome da sua Web App:
 
-https://bit.ly/geracao-nome-webapp-imersaoazdevops
+**https://bit.ly/geracao-nome-webapp-imersaoazdevops**
 
