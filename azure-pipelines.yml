@@ -3,6 +3,9 @@ trigger:
 
 variables:
  pathToProject: './ANPAdmin.UI/ANPAdmin.UI.csproj'
+ ResourceGroupName: imersao-azure-devops 
+ WebAppName: imersao-azdo-796aa02b
+ AppServicePlanName: imersao-azdo-796aa02b  
 
 jobs:
  - job: Build
@@ -32,3 +35,33 @@ jobs:
       PathtoPublish: '$(Build.ArtifactStagingDirectory)'
       ArtifactName: 'drop'
       publishLocation: 'Container'
+ 
+ - job: Deploy
+   dependsOn: Build
+   pool:
+    vmImage: ubuntu-latest
+   steps:
+   - task: DownloadBuildArtifacts@1
+     displayName: 'Baixar Artefatos'
+     inputs:
+       buildType: 'current'
+       downloadType: 'single'
+       artifactName: 'drop'
+       downloadPath: '$(System.ArtifactsDirectory)'
+   - task: AzureCLI@2
+     displayName: 'Implantar WebApp no Azure'
+     inputs:
+      azureSubscription: 'Azure - Imersão Azure DevOps-Imersão Azure DevOps'
+      scriptType: 'pscore'
+      scriptLocation: 'inlineScript'
+      inlineScript: |
+        az appservice plan create --name $(AppServicePlanName) --resource-group $(ResourceGroupName) --sku s1
+        az webapp create --resource-group $(ResourceGroupName) --plan $(AppServicePlanName) --name $(WebAppName) --runtime "DOTNETCORE|3.1"
+   - task: AzureRmWebAppDeployment@4
+     displayName: "Deploy do Artefato no Azure Web App"
+     inputs:
+       ConnectionType: 'AzureRM'
+       azureSubscription: 'Azure - Imersão Azure DevOps-Imersão Azure DevOps'
+       appType: 'webApp'
+       WebAppName: '$(WebAppName)'
+       packageForLinux: '$(System.DefaultWorkingDirectory)/drop/ANPAdmin.UI.zip'
