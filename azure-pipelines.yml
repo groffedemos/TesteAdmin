@@ -1,0 +1,22 @@
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+ pathToProject: './ANPAdmin.UI/ANPAdmin.UI.csproj'
+
+steps:
+ - task: DotNetCoreCLI@2
+   displayName: 'Restore das Dependencias'
+   inputs:
+     command: 'restore'
+     projects: $(pathToProject)
+     feedsToUse: 'select'
+ - task: DotNetCoreCLI@2
+   displayName: 'Compilar Aplicação'
+   inputs:
+     command: 'build'
+     projects: '$(pathToProject)'
+      
